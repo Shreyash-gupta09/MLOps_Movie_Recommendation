@@ -4,8 +4,19 @@ import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from fastapi.middleware.cors import CORSMiddleware
+
+
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Load data
 df1 = pd.read_csv('../data/tmdb_5000_credits.csv')
@@ -58,12 +69,21 @@ df2 = df2.reset_index()
 indices = pd.Series(df2.index, index=df2['title'])
 
 def get_recommendations(title):
-    idx = indices[title]
+    title = title.lower().strip()  # Normalize input
+
+    # Create a mapping of lowercased titles to their original index
+    title_mapping = {t.lower(): i for t, i in indices.items()}
+
+    if title not in title_mapping:
+        return ["Movie not found in dataset."]
+
+    idx = title_mapping[title]
     sim_scores = list(enumerate(cosine_sim[idx]))
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:11]
     movie_indices = [i[0] for i in sim_scores]
     return df2['title'].iloc[movie_indices].tolist()
+
 
 # API route
 @app.get("/recommend/{movie_name}", response_model=List[str])
