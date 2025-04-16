@@ -4,18 +4,20 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(to right, #1f4037, #99f2c8);
-  color: #fff;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #e0f7ff;
   font-family: 'Segoe UI', sans-serif;
   padding: 20px;
   text-align: center;
+  transition: background 0.5s ease-in-out;
 }
 
 h1 {
   font-size: 3rem;
   margin-bottom: 40px;
-  color: #ffe600;
-  text-shadow: 2px 2px #00000044;
+  color: #00c6ff;
+  text-shadow: 2px 2px 6px #00000088;
+  letter-spacing: 1px;
 }
 
 .input-container {
@@ -24,21 +26,30 @@ h1 {
   align-items: center;
   gap: 16px;
   margin-bottom: 30px;
+  width: 100%;
 }
 
 input {
   padding: 14px 18px;
   font-size: 18px;
-  width: 350px;
-  border-radius: 14px;
+  width: 320px;
+  border-radius: 12px;
   border: none;
-  box-shadow: 0 0 10px #00000033;
+  background: #ffffff11;
+  color: #fff;
+  box-shadow: 0 4px 10px #00000033;
   transition: 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+input::placeholder {
+  color: #b0d4ff;
 }
 
 input:focus {
   outline: none;
-  box-shadow: 0 0 12px #ffe60088;
+  box-shadow: 0 0 15px #00c6ff88;
+  background: #ffffff22;
 }
 
 button {
@@ -46,25 +57,25 @@ button {
   font-size: 18px;
   border-radius: 14px;
   border: none;
-  background: linear-gradient(to right, #f7971e, #ffd200);
-  color: #000;
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
+  color: #fff;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 10px #00000030;
+  box-shadow: 0 4px 12px #00000055;
 }
 
 button:hover {
   transform: scale(1.05);
-  background: linear-gradient(to right, #ffb347, #ffe259);
+  background: linear-gradient(45deg, #33ccff, #3366ff);
 }
 
 ul {
   list-style: none;
   padding: 0;
-  margin-top: 20px;
+  margin-top: 30px;
   width: 100%;
-  max-width: 500px;
+  max-width: 550px;
   text-align: left;
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
@@ -72,41 +83,45 @@ ul {
 
 li {
   margin: 10px 0;
-  padding: 14px 18px;
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  color: #fff;
-  transition: background 0.3s;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  color: #e6f7ff;
+  transition: background 0.3s ease;
 }
 
 li:hover {
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .loading {
   font-style: italic;
-  color: #ffe600;
+  color: #00c6ff;
+  font-weight: 500;
   transition: opacity 0.3s ease-in-out;
 }
 
 .fade-in {
   animation: fadeIn 0.5s ease-in-out;
 }
+
 .recommendation-box {
-  min-height: 150px; /* prevents flicker jump by reserving space */
+  min-height: 150px;
   width: 100%;
   max-width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 20px;
+  animation: fadeIn 0.6s ease;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(5px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
